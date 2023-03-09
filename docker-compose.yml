@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
     depends_on:
       - db
     networks:
@@ -23,6 +25,10 @@ services:
       - "5432:5432"
     networks:
       - app-tier
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
 networks:
   app-tier:
     driver: bridge
+volumes:
+  local_postgres_data: {}
